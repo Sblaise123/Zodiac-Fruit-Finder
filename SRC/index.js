@@ -23,9 +23,7 @@ export default function ZodiacFruitFinder() {
     }
   };
 
-    const handleReset = () => {
-      setSelectedSign('');
-      setResult(null);
-    };
-  
-  }
+  const handleReset = () => {
+    setSelectedSign('');
+    setResult(null);
+  };
