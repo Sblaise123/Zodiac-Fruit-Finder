@@ -1,3 +1,5 @@
+import React, { useState } from 'react';
+
 export default function ZodiacFruitFinder() {
   const [selectedSign, setSelectedSign] = useState('');
   const [result, setResult] = useState(null);
@@ -17,6 +19,21 @@ export default function ZodiacFruitFinder() {
     { value: 'pisces', label: 'Pisces', symbol: '♓', dates: 'Feb 19 - Mar 20' }
   ];
 
+  const zodiacFruits = {
+    aries: 'Apple',
+    taurus: 'Banana',
+    gemini: 'Grapes',
+    cancer: 'Cherry',
+    leo: 'Mango',
+    virgo: 'Pear',
+    libra: 'Peach',
+    scorpio: 'Pomegranate',
+    sagittarius: 'Orange',
+    capricorn: 'Fig',
+    aquarius: 'Blueberry',
+    pisces: 'Kiwi'
+  };
+
   const handleReveal = () => {
     if (selectedSign) {
       setResult(zodiacFruits[selectedSign]);
@@ -27,3 +44,31 @@ export default function ZodiacFruitFinder() {
     setSelectedSign('');
     setResult(null);
   };
+
+  return (
+    <div>
+      <label>
+        Select your zodiac sign:
+        <select value={selectedSign} onChange={(e) => setSelectedSign(e.target.value)}>
+          <option value="">-- Select --</option>
+          {zodiacSigns.map((s) => (
+            <option key={s.value} value={s.value}>
+              {s.symbol} {s.label} ({s.dates})
+            </option>
+          ))}
+        </select>
+      </label>
+      <div>
+        <button onClick={handleReveal} disabled={!selectedSign}>
+          Reveal Fruit
+        </button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+      {result && (
+        <div>
+          <strong>Fruit:</strong> {result}
+        </div>
+      )}
+    </div>
+  );
+}
